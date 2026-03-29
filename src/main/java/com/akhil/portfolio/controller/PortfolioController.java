@@ -75,7 +75,6 @@ public class PortfolioController {
 
         model.addAttribute("profile", profile);
         model.addAttribute("experienceYears", "5+");
-        //model.addAttribute("performanceGain", "38%");
         model.addAttribute("rolesCount", "3");
         return "index";
     }
