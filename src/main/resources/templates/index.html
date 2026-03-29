@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${profile.name} + ' | ' + ${profile.title}">Portfolio</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<nav class="nav">
+    <div class="container nav-inner">
+        <a class="brand" href="#top" th:text="${profile.name}">Akhil Raveendran Pillai</a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#education">Education</a>
+            <a href="#resume">Resume</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<main id="top">
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-card">
+                <div class="eyebrow">Java • Spring Boot • Cloud-Native Microservices</div>
+                <h1>Building scalable, reliable software with modular architecture.</h1>
+                <p th:text="${profile.summary}"></p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="#resume">Download Resume</a>
+                    <a class="btn btn-secondary" href="#contact">Get in Touch</a>
+                </div>
+            </div>
+
+            <div class="hero-side">
+                <div class="panel profile-card">
+                    <div class="avatar">AR</div>
+                    <h2 th:text="${profile.title}">Software Engineer</h2>
+                    <p class="muted">Focused on microservices, CI/CD automation, testing, observability and collaborative product engineering.</p>
+                    <div class="meta-list">
+                        <div class="meta-item">
+                            <small>Location</small>
+                            <span th:text="${profile.location}"></span>
+                        </div>
+                        <div class="meta-item">
+                            <small>Email</small>
+                            <a th:href="'mailto:' + ${profile.email}" th:text="${profile.email}"></a>
+                        </div>
+                        <div class="meta-item">
+                            <small>LinkedIn</small>
+                            <a th:href="${profile.linkedIn}" target="_blank" rel="noreferrer" th:text="${profile.linkedIn}"></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats">
+                    <div class="panel stat"><strong th:text="${experienceYears}">6+</strong><span>Years in software engineering</span></div>
+                    <!--<div class="panel stat"><strong th:text="${performanceGain}">38%</strong><span>Performance gain delivered</span></div>
+                    --><div class="panel stat"><strong th:text="${rolesCount}">3</strong><span>Core roles across backend teams</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title">About</h2>
+            <p class="section-subtitle">
+                My work centers on backend systems that are easy to extend, test, observe, and deploy. I enjoy translating product needs into dependable APIs and microservices, and I care deeply about code quality, delivery speed, and long-term maintainability.
+            </p>
+            <div class="grid-3">
+                <article class="card">
+                    <h3>Architecture First</h3>
+                    <p>I work with clean, hexagonal, and domain-driven patterns to keep services modular, testable, and resilient.</p>
+                </article>
+                <article class="card">
+                    <h3>Delivery Mindset</h3>
+                    <p>I build efficient CI/CD workflows with GitHub Actions, Jenkins, Docker, and Kubernetes to support reliable releases.</p>
+                </article>
+                <article class="card">
+                    <h3>Engineering Quality</h3>
+                    <p>I value TDD, strong reviews, observability, and performance tuning to keep software stable in production.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <p class="section-subtitle">A strong backend foundation with practical cloud, DevOps, testing, and frontend exposure.</p>
+            <div class="card">
+                <div class="skills">
+                    <span class="chip" th:each="skill : ${profile.skills}" th:text="${skill}">Spring Boot</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <p class="section-subtitle">A progression through backend engineering roles with growing ownership in architecture, delivery, and code quality.</p>
+            <div class="timeline">
+                <article class="timeline-item" th:each="experience : ${profile.experiences}">
+                    <div class="timeline-date" th:text="${experience.duration}"></div>
+                    <div>
+                        <h3 th:text="${experience.role}"></h3>
+                        <h4 th:text="${experience.company}"></h4>
+                        <ul>
+                            <li th:each="highlight : ${experience.highlights}" th:text="${highlight}"></li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="education">
+        <div class="container">
+            <h2 class="section-title">Education & Certifications</h2>
+            <div class="grid-3">
+                <article class="card" th:each="edu : ${profile.education}">
+                    <h3 th:text="${edu.degree}"></h3>
+                    <p th:text="${edu.institution}"></p>
+                    <p th:text="'Completed in ' + ${edu.year} + '.'"></p>
+                </article>
+                <article class="card">
+                    <h3>Certifications & Recognition</h3>
+                    <ul>
+                        <li th:each="cert : ${profile.certifications}" th:text="${cert}"></li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="resume">
+        <div class="container">
+            <h2 class="section-title">Resume</h2>
+            <p class="section-subtitle">A dedicated section designed to make the full resume easy to preview and download.</p>
+            <div class="panel resume-card">
+                <div>
+                    <h3 class="resume-heading">Download the full resume</h3>
+                    <p class="muted">
+                        This Spring Boot portfolio serves the resume directly from the application, so the downloadable PDF works when you deploy the site.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" th:href="@{/files/AkhilRaveendanPillai_Resume.pdf}" download>Download PDF Resume</a>
+                        <a class="btn btn-secondary" th:href="@{/files/AkhilRaveendanPillai_Resume.pdf}" target="_blank" rel="noreferrer">Open Resume</a>
+                    </div>
+                </div>
+                <div class="resume-preview">
+                    <div class="resume-sheet">
+                        <strong th:text="${profile.name}"></strong>
+                        <span th:text="${profile.title} + ' • ' + ${profile.location}"></span>
+                        <hr>
+                        <span>Java • Spring Boot • AWS • CI/CD • Microservices • TDD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <p class="section-subtitle">Open to software engineering opportunities, backend roles, and product-focused engineering teams.</p>
+            <div class="panel contact-panel">
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <small>Email</small>
+                        <a th:href="'mailto:' + ${profile.email}" th:text="${profile.email}"></a>
+                    </div>
+                    <div class="contact-item">
+                        <small>Phone</small>
+                        <a th:href="'tel:' + ${#strings.replace(profile.phone, ' ', '')}" th:text="${profile.phone}"></a>
+                    </div>
+                    <div class="contact-item">
+                        <small>LinkedIn</small>
+                        <a th:href="${profile.linkedIn}" target="_blank" rel="noreferrer" th:text="${profile.linkedIn}"></a>
+                    </div>
+                    <div class="contact-item">
+                        <small>Location</small>
+                        <span th:text="${profile.location}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">© 2026 Akhil Raveendran Pillai — Built with Spring Boot and Thymeleaf.</div>
+</footer>
+</body>
+</html>
